@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <h4 style="margin-left:1250px;color:red;"><a href="{% url 'logout' %}">Logout</a></h4>
+</div>
+<br>
+<br>
+<div class="row">
+
+    <div class="col-md-6">
+        <center><h4>create yours</h4></center>
+        <form method="post" class="p-3 shadow" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+    <input type="text" name="caption" class="form-control" placeholder="caption">
+    </div>
+
+<!--    <div class="form-group">-->
+<!--    <input type="text" name="author" class="form-control" placeholder="Author">-->
+<!--    </div>-->
+
+    <div class="form-group">
+    <input name="myfile" type="file">
+    </div>
+
+    <div class="form-group">
+    <textarea name="desc" cols="80" rows="20" placeholder="description"></textarea>
+    </div>
+
+            <center><input type="submit" class="btn btn-success"></center>
+
+</form>
+    </div>
+    <div class="col-md-2">
+    </div>
+    {% for i in story %}
+    <div class="col-md-4">
+        <div class="form-group" style="display:inline;">
+						<h2>{{i.caption}}</h2>
+					</div>
+					<div class="form-group">
+						<h4>{{i.storyteller}}</h4>
+						<p>{{i.desc}}</p>
+					</div>
+        <a href="{% url 'updatestory' i.id %}">edit</a>
+        <a style="padding-left:10px; color:red" href="{% url 'deletestory' i.id %}">delete</a>
+    </div>
+    {% endfor %}
+
+</div>
+<br>
+
+{% endblock %}

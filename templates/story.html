@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>STORY WORLD</h1>
+                </div>
+            </div>
+        </div>
+</div>
+<div style="display:inline-flex;">
+<h3>{{user.username}}</h3>
+<h5 style="margin-left:1000px"><a href="{% url 'crstory' %}">create story</a></h5>
+<h5><a href="{% url 'logout' %}" style="padding-left:20px; margin-top:2px; color:red">Logout</a></h5>
+</div>
+{% for sto in stories %}
+<div class="card shadow">
+
+	<div class="card-body">
+
+		<div class="row">
+
+				<div class="col-md-6 blog-bg">
+					<div class="form-group" style="display:inline;">
+						<h2>{{sto.caption}}</h2>
+					</div>
+					<div class="form-group">
+						<h4>{{sto.storyteller}}</h4>
+						<p>{{sto.desc}}</p>
+					</div>
+				</div><!-- /col -->
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-4">
+					{% if sto.image %}
+					<div class="img-wrapper">
+						<img class="img-responsive" src={{sto.image}} style="height:300px; width:350px;">
+					</div>
+					{% endif %}
+				</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
